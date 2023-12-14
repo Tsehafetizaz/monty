@@ -13,7 +13,7 @@ stack_t *new_node;
 int num;
 
 
-if (arg == NULL)
+if (arg == NULL || !is_number(arg))
 {
 fprintf(stderr, "L%d: usage: push integer\n", line_number);
 exit(EXIT_FAILURE);
@@ -58,3 +58,23 @@ printf("%d\n", temp->n);
 temp = temp->next;
 }
 }
+
+/**
+ * pint - Prints all values on the stack
+ * @stack: Double pointer to the top of the stack
+ * @line_number: Line number in the file (unused)
+ * @unused: Unused parameter, included to match function signature
+ */
+
+void pint(stack_t **stack, unsigned int line_number, char *unused)
+{
+if (*stack == NULL)
+{
+fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+exit(EXIT_FAILURE);
+}
+
+printf("%d\n", (*stack)->n);
+(void)unused;
+}
+

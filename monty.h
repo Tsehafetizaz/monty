@@ -34,12 +34,13 @@ void (*f)(stack_t **stack, unsigned int line_number,char *arg);
 
 void push(stack_t **stack, unsigned int line_number, char *arg);
 void pall(stack_t **stack, unsigned int line_number, char *arg);
-void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number, char *arg);
+void pop(stack_t **stack, unsigned int line_number, char *arg);
+void swap(stack_t **stack, unsigned int line_number, char *arg);
+void add(stack_t **stack, unsigned int line_number, char *arg);
 void free_stack(stack_t **stack);
 int parse_file(const char *file, stack_t **stack);
+int is_number(const char *str);
 
 
 #endif /* MONTY_H */

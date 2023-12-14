@@ -1,7 +1,8 @@
-#define _POSIX_C_SOURCE 200809L
 #include "monty.h"
 #include <string.h>
-#include <sys/types.h>
+#include <stdlib.h>
+
+#define BUFFER_SIZE 1024
 
 /**
  * parse_line - Parses a line from Monty file and executes the opcode
@@ -11,24 +12,28 @@
  */
 void parse_line(char *line, stack_t **stack, unsigned int line_number)
 {
-	char *opcode;
+	char *opcode, *arg;
 	instruction_t ops[] = {
 		{"push", push},
 		{"pall", pall},
-
+		{"pint", pint},
 		{NULL, NULL}
 	};
 	int i;
 
 	opcode = strtok(line, " \n\t");
 	if (opcode == NULL || opcode[0] == '#')
+	{
 		return;
+	}
+
+	arg = strtok(NULL, " \n\t");
 
 	for (i = 0; ops[i].opcode; i++)
 	{
 		if (strcmp(ops[i].opcode, opcode) == 0)
 		{
-			ops[i].f(stack, line_number,NULL);
+			ops[i].f(stack, line_number, arg);
 			return;
 		}
 	}
@@ -47,19 +52,25 @@ void parse_line(char *line, stack_t **stack, unsigned int line_number)
 int parse_file(const char *file, stack_t **stack)
 {
 	FILE *fp;
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t read;
+	char *line = malloc(BUFFER_SIZE);
+	size_t len = BUFFER_SIZE;
 	unsigned int line_number = 0;
 
-	fp = fopen(file, "r");
-	if (fp == NULL)
+	if (line == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", file);
+		fprintf(stderr, "Error: malloc failed\n");
 		return (EXIT_FAILURE);
 	}
 
-	while ((read = getline(&line, &len, fp)) != -1)
+	fp = fopen(file, "r");
+if (fp == NULL)
+{
+fprintf(stderr, "Error: Can't open file %s\n", file);
+free(line);
+return (EXIT_FAILURE);
+}
+
+	while (fgets(line, len, fp) != NULL)
 	{
 		line_number++;
 		parse_line(line, stack, line_number);
