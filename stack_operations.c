@@ -106,9 +106,35 @@ if (*stack != NULL)
 (void)unused;
 }
 
+/**
+ * swap - swaps values on the stack
+ * @stack: Double pointer to the top of the stack
+ * @line_number: Line number in the file (unused)
+ * @unused: Unused parameter, included to match function signature
+ */
 
+void swap(stack_t **stack, unsigned int line_number, char *unused)
+{
+stack_t *temp;
+if (*stack == NULL || (*stack)->next == NULL)
+{
+fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+exit(EXIT_FAILURE);
+}
 
+temp = *stack;
+*stack = (*stack)->next;
+temp->next = (*stack)->next;
+(*stack)->prev = NULL;
+if (temp->next != NULL)
+{
+temp->next->prev = temp;
+}
+(*stack)->next = temp;
+temp->prev = *stack;
 
+(void)unused;
+}
 
 
 
