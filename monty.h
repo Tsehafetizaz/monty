@@ -44,6 +44,8 @@ int is_number(const char *str);
 void nop(stack_t **stack, unsigned int line_number, char *unused);
 void sub(stack_t **stack, unsigned int line_number, char *unused);
 void div_op(stack_t **stack, unsigned int line_number, char *unused);
+void mul(stack_t **stack, unsigned int line_number, char *unused);
+void mod(stack_t **stack, unsigned int line_number, char *unused);
 
 
 
