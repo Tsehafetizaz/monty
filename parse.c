@@ -1,4 +1,7 @@
+#define _POSIX_C_SOURCE 200809L
 #include "monty.h"
+#include <string.h>
+#include <sys/types.h>
 
 /**
  * parse_line - Parses a line from Monty file and executes the opcode
@@ -25,7 +28,7 @@ void parse_line(char *line, stack_t **stack, unsigned int line_number)
 	{
 		if (strcmp(ops[i].opcode, opcode) == 0)
 		{
-			ops[i].f(stack, line_number);
+			ops[i].f(stack, line_number,NULL);
 			return;
 		}
 	}
