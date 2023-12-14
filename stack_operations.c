@@ -78,3 +78,49 @@ printf("%d\n", (*stack)->n);
 (void)unused;
 }
 
+/**
+ * pop - removes values on the stack
+ * @stack: Double pointer to the top of the stack
+ * @line_number: Line number in the file (unused)
+ * @unused: Unused parameter, included to match function signature
+ */
+
+void pop(stack_t **stack, unsigned int line_number, char *unused)
+{
+stack_t *temp;
+if (*stack == NULL)
+{
+fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+exit(EXIT_FAILURE);
+}
+
+temp = *stack;
+*stack = (*stack)->next;
+free(temp);
+
+if (*stack != NULL)
+{
+(*stack)->prev = NULL;
+}
+
+(void)unused;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
