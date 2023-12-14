@@ -42,3 +42,30 @@ void nop(stack_t **stack, unsigned int line_number, char *unused)
 (void)line_number;
 (void)unused;
 }
+
+/**
+ * sub - adds values on the stack
+ * @stack: Double pointer to the top of the stack
+ * @line_number: Line number in the file (unused)
+ * @unused: Unused parameter, included to match function signature
+ */
+void sub(stack_t **stack, unsigned int line_number, char *unused)
+{
+stack_t *temp;
+int difference;
+
+if (*stack == NULL || (*stack)->next == NULL)
+{
+fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
+exit(EXIT_FAILURE);
+}
+
+temp = *stack;
+difference = (*stack)->next->n - (*stack)->n;
+*stack = (*stack)->next;
+(*stack)->n = difference;
+(*stack)->prev = NULL;
+free(temp);
+
+(void)unused;
+}
