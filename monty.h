@@ -41,6 +41,7 @@ void add(stack_t **stack, unsigned int line_number, char *arg);
 void free_stack(stack_t **stack);
 int parse_file(const char *file, stack_t **stack);
 int is_number(const char *str);
+void nop(stack_t **stack, unsigned int line_number, char *unused);
 
 
 

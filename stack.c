@@ -28,3 +28,17 @@ free(temp);
 
 (void)unused;
 }
+
+/**
+ * nop - does noting to the stack
+ * @stack: Double pointer to the top of the stack
+ * @line_number: Line number in the file (unused)
+ * @unused: Unused parameter, included to match function signature
+ */
+
+void nop(stack_t **stack, unsigned int line_number, char *unused)
+{
+(void)stack;
+(void)line_number;
+(void)unused;
+}
