@@ -43,6 +43,7 @@ int parse_file(const char *file, stack_t **stack);
 int is_number(const char *str);
 void nop(stack_t **stack, unsigned int line_number, char *unused);
 void sub(stack_t **stack, unsigned int line_number, char *unused);
+void div_op(stack_t **stack, unsigned int line_number, char *unused);
 
 
 
